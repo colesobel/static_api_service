@@ -7,6 +7,7 @@ var express = require('express')
   , routes = require('./routes')
   , http = require('http')
   , path = require('path')
+  , data = require('./custom-modules/data')
   , logic = require('./custom-modules/logic');
 
 
@@ -43,4 +44,6 @@ app.get('/users', routes.users);
 
 app.get('/active-users', routes.activeUsers)
 
-app.get('/user-profile', routes.userProfile)
+app.get('/users/:id', function(req, res) {
+    res.json(logic.userProfile(data, req.params.id))
+})
